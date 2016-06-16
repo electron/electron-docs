@@ -18,7 +18,7 @@ npm install electron-docs --save
 
 ## Programmatic Usage
 
-Basic usage:
+Require it and invoke the function with no arguments:
 
 ```js
 const docs = require('electron-docs')
@@ -28,7 +28,7 @@ docs().then(function(docs) {
 })
 ```
 
-Each object in the `doc` array looks like this:
+Each object in the `docs` array looks like this:
 
 ```js
 {
@@ -39,7 +39,7 @@ Each object in the `doc` array looks like this:
 }
 ```
 
-The latest version of electron is fetched by default. If you need an older
+The latest version of Electron is fetched by default. If you need a different
 version, specify it as the first argument:
 
 ```js
@@ -69,13 +69,12 @@ Add this to your package.json file:
 When you run `npm run docs`, the module writes the stringified JSON object to
 `stdout`, and the output is piped into a file.
 
-stdout ftw!
+`stdout` ftw!
 
 ## Tests
 
 ```sh
-npm install
-npm test
+npm i && npm t
 ```
 
 ## Dependencies
