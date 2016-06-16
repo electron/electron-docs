@@ -1,4 +1,4 @@
-# electron-docs
+# electron-docs [![Build Status](https://travis-ci.org/zeke/electron-docs.svg?branch=master)](https://travis-ci.org/zeke/electron-docs)
 
 Fetch Electron documentation as raw markdown strings
 
