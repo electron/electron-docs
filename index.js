@@ -3,6 +3,7 @@ const path = require('path')
 const got = require('got')
 const dir = require('node-dir')
 const tar = require('tar-fs')
+const exists = require('path-exists').sync
 const gunzip = require('gunzip-maybe')
 const latestRelease = require('github-latest-release')
 
@@ -54,12 +55,25 @@ function download (version, callback) {
         })
     })
 
-  got.stream(tarballUrl)
-    .pipe(gunzip())
-    .pipe(extractor)
-    .on('error', function(e) {
-      callback(e)
-    })
+  if (exists(tarball)) {
+    fs.createReadStream(tarball)
+      .pipe(gunzip())
+      .pipe(extractor)
+      .on('error', function (e) {
+        callback(e)
+      })
+  } else {
+    got.stream(tarballUrl)
+      .pipe(fs.createWriteStream(tarball))
+      .on('end', function () {
+        fs.createReadStream(tarball)
+          .pipe(gunzip())
+          .pipe(extractor)
+          .on('error', function (e) {
+            callback(e)
+          })
+      })
+  }
 }
 
 module.exports = require('bluebird').promisify(docs)
