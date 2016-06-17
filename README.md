@@ -23,9 +23,9 @@ npm install electron-docs --save
 Require it and invoke the function with no arguments:
 
 ```js
-const docs = require('electron-docs')
+const electronDocs = require('electron-docs')
 
-docs().then(function(docs) {
+electronDocs().then(function(docs) {
   // docs is an array of objects, one for each markdown file in /docs
 })
 ```
@@ -45,13 +45,13 @@ The latest version of Electron is fetched by default. If you need a different
 version, specify it as the first argument:
 
 ```js
-docs('1.2.0')
+electronDocs('1.2.0')
 ```
 
 If you prefer node-style callbacks instead of promises, those are supported too:
 
 ```js
-docs(function(err, docs) {
+electronDocs(function(err, docs) {
   console.log(err, docs)
 })
 ```
