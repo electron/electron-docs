@@ -1,6 +1,6 @@
 {
   "name": "electron-docs",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Fetch Electron documentation as raw markdown strings",
   "main": "index.js",
   "bin": "cli.js",
