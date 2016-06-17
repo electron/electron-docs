@@ -41,9 +41,9 @@ function download (version, callback) {
         path.join(electronDir, 'docs'),
         function (err, content, filename, next) {
           docs.push({
-            version: version,
+            slug: path.basename(filename, '.md'),
             filename: path.relative(electronDir, filename),
-            basename: path.basename(filename, '.md'),
+            version: version,
             markdown_content: content
           })
           next()

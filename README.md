@@ -34,9 +34,9 @@ Each object in the `docs` array looks like this:
 
 ```js
 {
- version: "1.2.3",
+ slug: "windows-store-guide",
  filename: "docs/tutorial/windows-store-guide.md",
- basename: "windows-store-guide",
+ version: "1.2.3",
  markdown_content: "# Windows Store Guide\n\n..."
 }
 ```
@@ -45,13 +45,21 @@ The latest version of Electron is fetched by default. If you need a different
 version, specify it as the first argument:
 
 ```js
-electronDocs('1.2.0')
+electronDocs('1.2.0').then(function(docs) {
+
+})
 ```
 
 If you prefer node-style callbacks instead of promises, those are supported too:
 
 ```js
+// latest
 electronDocs(function(err, docs) {
+  console.log(err, docs)
+})
+
+// a specific version
+electronDocs('1.0.0', function(err, docs) {
   console.log(err, docs)
 })
 ```

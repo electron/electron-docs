@@ -14,7 +14,7 @@ test('docs', function (t) {
       t.ok(semver.valid(doc.version), 'has a valid semver version')
       t.ok(semver.gt(doc.version, '1.2.2'), 'fetches latest version by default')
       t.ok(doc.filename, 'each doc has a filename property')
-      t.ok(doc.basename, 'each doc has a basename property')
+      t.ok(doc.slug, 'each doc has a slug property')
       t.ok(doc.markdown_content, 'each doc has a markdown_content property')
       // t.ok(doc.html_content, 'each doc has a markdown_content property')
     }),
