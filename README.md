@@ -8,6 +8,7 @@ This package:
 - does not alter the source markdown.
 - returns a JSON array of doc objects with stringified file contents therein.
 - fetches the latest electron by default, but any version can be fetched.
+- caches downloaded tarballs on disk for faster subsequent execution.
 - supports promises or callbacks.
 - can be used programmatically.
 - has a CLI that writes JSON to STDOUT.
