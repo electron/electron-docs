@@ -4,11 +4,13 @@ Fetch Electron documentation as raw markdown strings
 
 This package:
 
-- Downloads docs for any version of Electron
-- Downloads the latest version of Electron by default
-- Returns a JSON array of documents
-- Supports promises or callbacks
-- Can be used programmatically or on the command line
+- downloads a tarball from GitHub and slurps up all the markdown files in `/doc`.
+- does not alter the source markdown.
+- returns a JSON array of doc objects with stringified file contents therein.
+- fetches the latest electron by default, but any version can be fetched.
+- supports promises or callbacks.
+- can be used programmatically.
+- has a CLI that writes JSON to STDOUT.
 
 ## Installation
 
