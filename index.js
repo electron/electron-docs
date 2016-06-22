@@ -22,7 +22,7 @@ function docs (version, callback) {
 function download (version, callback) {
   version = version.replace(/v/, '')
   var docs = []
-  var tarballUrl = `https://api.github.com/repos/electron/electron/tarball/v${version}`
+  var tarballUrl = `https://github.com/electron/electron/archive/v${version}.tar.gz`
   var electronDir
   var tmpdir = require('os').tmpdir()
   var filename = `electron-v${version}.tgz`
@@ -55,25 +55,22 @@ function download (version, callback) {
         })
     })
 
-  if (exists(tarball)) {
-    fs.createReadStream(tarball)
-      .pipe(gunzip())
-      .pipe(extractor)
-      .on('error', function (e) {
-        callback(e)
-      })
-  } else {
-    got.stream(tarballUrl)
-      .pipe(fs.createWriteStream(tarball))
-      .on('end', function () {
-        fs.createReadStream(tarball)
-          .pipe(gunzip())
-          .pipe(extractor)
-          .on('error', function (e) {
-            callback(e)
-          })
-      })
-  }
+  // if (exists(tarball)) {
+  //   console.error(tarball)
+  //   fs.createReadStream(tarball)
+  //     .pipe(gunzip())
+  //     .pipe(extractor)
+  //     .on('error', function (e) {
+  //       callback(e)
+  //     })
+  // } else {
+  got.stream(tarballUrl)
+    .pipe(gunzip())
+    .pipe(extractor)
+    .on('error', function (e) {
+      callback(e)
+    })
+  // }
 }
 
 module.exports = require('bluebird').promisify(docs)
