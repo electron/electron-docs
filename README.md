@@ -37,7 +37,6 @@ Each object in the `docs` array looks like this:
 {
  slug: "windows-store-guide",
  filename: "docs/tutorial/windows-store-guide.md",
- version: "1.2.3",
  markdown_content: "# Windows Store Guide\n\n..."
 }
 ```
@@ -47,7 +46,17 @@ version, specify it as the first argument:
 
 ```js
 electronDocs('1.2.0').then(function(docs) {
+  // ...
+})
+```
 
+You can also point to a local directory instead of downloading a tarball:
+
+```js
+const path = require('path')
+const docsPath = path.join(__dirname, 'docs')
+electronDocs(docsPath).then(function(docs) {
+  // ...
 })
 ```
 
