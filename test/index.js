@@ -1,6 +1,6 @@
 const test = require('tape')
 const semver = require('semver')
-const electronDocs = require('.')
+const electronDocs = require('..')
 
 test('electronDocs', {timeout: 30*1000}, function (t) {
 

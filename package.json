@@ -5,7 +5,7 @@
   "main": "index.js",
   "bin": "cli.js",
   "scripts": {
-    "test": "node test.js | tap-spec"
+    "test": "node test/index.js | tap-spec"
   },
   "repository": {
     "type": "git",
