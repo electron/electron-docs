@@ -1,17 +1,8 @@
 # electron-docs [![Build Status](https://travis-ci.org/zeke/electron-docs.svg?branch=master)](https://travis-ci.org/zeke/electron-docs)
 
-Fetch Electron documentation as raw markdown strings
-
-This package:
-
-- downloads a tarball from GitHub and slurps up all the markdown files in `/doc`.
-- does not alter the source markdown.
-- returns a JSON array of doc objects with stringified file contents therein.
-- fetches the latest electron by default, but any version can be fetched.
-- caches downloaded tarballs on disk for faster subsequent execution.
-- supports promises or callbacks.
-- can be used programmatically.
-- has a CLI that writes JSON to STDOUT.
+This package consumes the [electron/electron](https://github.com/electron/electron)
+repo in search of markdown files, and returns an array of file objects with stringified
+file contents.
 
 ## Installation
 
