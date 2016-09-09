@@ -7,7 +7,7 @@
   "scripts": {
     "test": "node test/index.js | tap-spec"
   },
-  "repository": "https://github.com/zeke/electron-docs",
+  "repository": "https://github.com/electron/electron-docs",
   "keywords": [
     "electron",
     "api",
@@ -19,10 +19,6 @@
   ],
   "author": "Zeke Sikelianos <zeke@sikelianos.com> (http://zeke.sikelianos.com)",
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/zeke/electron-docs/issues"
-  },
-  "homepage": "https://github.com/zeke/electron-docs#readme",
   "dependencies": {
     "bluebird": "^3.4.0",
     "github-latest-release": "^0.1.1",

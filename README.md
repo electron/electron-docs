@@ -1,4 +1,4 @@
-# electron-docs [![Build Status](https://travis-ci.org/zeke/electron-docs.svg?branch=master)](https://travis-ci.org/zeke/electron-docs)
+# electron-docs [![Build Status](https://travis-ci.org/electron/electron-docs.svg?branch=master)](https://travis-ci.org/electron/electron-docs)
 
 This package consumes the [electron/electron](https://github.com/electron/electron)
 repo in search of markdown files, and returns an array of file objects with stringified
