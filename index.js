@@ -23,7 +23,7 @@ function docs (version, callback) {
     // version is a local directory
     readLocalFiles(version, callback)
   } else {
-    console.error('invalid electron version specified')
+    console.error(`invalid electron version specified: ${version}`)
   }
 }
 
