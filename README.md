@@ -4,6 +4,8 @@ This package consumes the [electron/electron](https://github.com/electron/electr
 repo in search of markdown files, and returns an array of file objects with stringified
 file contents.
 
+It is used by Electron's [docs linter](https://github.com/electron/electron-docs-linter).
+
 ## Installation
 
 ```sh
