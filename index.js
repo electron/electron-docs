@@ -21,7 +21,13 @@ function docs (version, callback) {
     download(version, callback)
   } else if (exists(version)) {
     // version is a local directory
-    readLocalFiles(version, callback)
+    readLocalFiles(version, (err, files) => {
+      if (err) return callback(err)
+      readLocalFiles(path.resolve(version, 'structures'), (structErr, structFiles) => {
+        if (structErr) return callback(structErr)
+        callback(null, files.concat(structFiles))
+      })
+    })
   } else {
     console.error(`invalid electron version specified: ${version}`)
   }
@@ -44,7 +50,13 @@ function download (version, callback) {
       }
     })
     .on('finish', function extracted () {
-      readLocalFiles(path.join(electronDir, 'docs'), callback)
+      readLocalFiles(path.join(electronDir, 'docs', 'api'), (err, files) => {
+        if (err) return callback(err)
+        readLocalFiles(path.join(electronDir, 'docs', 'api', 'structures'), (structErr, structFiles) => {
+          if (structErr) return callback(structErr)
+          callback(null, files.concat(structFiles))
+        })
+      })
     })
 
   got.stream(tarballUrl)
