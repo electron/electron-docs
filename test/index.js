@@ -4,7 +4,7 @@ const semver = require('semver')
 const electronDocs = require('..')
 
 test('electronDocs', {timeout: 30 * 1000}, function (t) {
-  t.plan(9)
+  t.plan(10)
 
   electronDocs().then(function (docs) {
     t.comment('default to latest version')
