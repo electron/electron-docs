@@ -26,5 +26,8 @@ test('electronDocs', {timeout: 30 * 1000}, function (t) {
     t.ok(docs.every(doc => doc.filename.length > 0), 'every doc has a filename property')
     t.ok(docs.every(doc => doc.slug.length > 0), 'every doc has a slug property')
     t.ok(docs.every(doc => doc.markdown_content.length > 0), 'every doc has a markdown_content property')
+
+    t.comment('structs directory')
+    t.ok(docs.find(doc => doc.slug === 'bounds'), 'the structures docs are found correctly')
   })
 })
