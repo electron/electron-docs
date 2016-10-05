@@ -8,6 +8,17 @@ const gunzip = require('gunzip-maybe')
 const latestRelease = require('github-latest-release')
 const semver = require('semver')
 
+function readAllDocFiles (rootAPIDocsPath, callback) {
+  readLocalFiles(rootAPIDocsPath, (err, files) => {
+    if (err) return callback(err)
+    if (!fs.existsSync(path.resolve(rootAPIDocsPath, 'structures'))) return callback(null, files)
+    readLocalFiles(path.resolve(rootAPIDocsPath, 'structures'), (structErr, structFiles) => {
+      if (structErr) return callback(structErr)
+      callback(null, files.concat(structFiles))
+    })
+  })
+}
+
 function docs (version, callback) {
   if (!callback) {
     // version not specified, default to latest
@@ -21,7 +32,7 @@ function docs (version, callback) {
     download(version, callback)
   } else if (exists(version)) {
     // version is a local directory
-    readLocalFiles(version, callback)
+    readAllDocFiles(version, callback)
   } else {
     console.error(`invalid electron version specified: ${version}`)
   }
@@ -44,7 +55,7 @@ function download (version, callback) {
       }
     })
     .on('finish', function extracted () {
-      readLocalFiles(path.join(electronDir, 'docs'), callback)
+      readAllDocFiles(path.join(electronDir, 'docs', 'api'), callback)
     })
 
   got.stream(tarballUrl)
