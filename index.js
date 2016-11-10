@@ -82,4 +82,4 @@ function readLocalFiles (directory, callback) {
     })
 }
 
-module.exports = require('bluebird').promisify(docs)
+module.exports = require('pify')(docs)
