@@ -4,10 +4,10 @@ const semver = require('semver')
 const electronDocs = require('..')
 
 test('electronDocs', {timeout: 30 * 1000}, function (t) {
-  t.plan(10)
+  t.plan(11)
 
-  electronDocs().then(function (docs) {
-    t.comment('default to latest version')
+  electronDocs('master').then(function (docs) {
+    t.comment('fetch by branch name')
     t.ok(docs.length > 0, 'docs is a non-empty array')
     t.ok(docs.every(doc => doc.filename.length > 0), 'every doc has a filename property')
     t.ok(docs.every(doc => doc.slug.length > 0), 'every doc has a slug property')
@@ -15,13 +15,19 @@ test('electronDocs', {timeout: 30 * 1000}, function (t) {
   })
 
   electronDocs('1.2.0').then(function (docs) {
-    t.comment('specific version')
+    t.comment('fetch by version number')
+    var doc = docs[0]
+    t.ok(docs.every(doc => doc.filename.length > 0), 'every doc has a filename property')
+  })
+
+  electronDocs('76375a83eb3a97e7aed14d37d8bdc858c765e564').then(function (docs) {
+    t.comment('fetch by commit SHA')
     var doc = docs[0]
     t.ok(docs.every(doc => doc.filename.length > 0), 'every doc has a filename property')
   })
 
   electronDocs(path.join(__dirname, 'fixtures')).then(function (docs) {
-    t.comment('local directory')
+    t.comment('fetch from local directory')
     t.ok(docs.length > 0, 'docs is a non-empty array')
     t.ok(docs.every(doc => doc.filename.length > 0), 'every doc has a filename property')
     t.ok(docs.every(doc => doc.slug.length > 0), 'every doc has a slug property')
