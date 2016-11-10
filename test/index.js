@@ -20,6 +20,12 @@ test('electronDocs', {timeout: 30 * 1000}, function (t) {
     t.ok(docs.every(doc => doc.filename.length > 0), 'every doc has a filename property')
   })
 
+  // electronDocs('76375a83eb3a97e7aed14d37d8bdc858c765e564').then(function (docs) {
+  //   t.comment('commit SHA')
+  //   var doc = docs[0]
+  //   t.ok(docs.every(doc => doc.filename.length > 0), 'every doc has a filename property')
+  // })
+
   electronDocs(path.join(__dirname, 'fixtures')).then(function (docs) {
     t.comment('local directory')
     t.ok(docs.length > 0, 'docs is a non-empty array')

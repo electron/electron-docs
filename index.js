@@ -3,7 +3,7 @@ const path = require('path')
 const got = require('got')
 const dir = require('node-dir')
 const tar = require('tar-fs')
-const exists = require('path-exists').sync
+const pathExists = require('path-exists').sync
 const gunzip = require('gunzip-maybe')
 const latestRelease = require('github-latest-release')
 const semver = require('semver')
@@ -11,11 +11,7 @@ const semver = require('semver')
 function readAllDocFiles (rootAPIDocsPath, callback) {
   readLocalFiles(rootAPIDocsPath, (err, files) => {
     if (err) return callback(err)
-    if (!fs.existsSync(path.resolve(rootAPIDocsPath, 'structures'))) return callback(null, files)
-    readLocalFiles(path.resolve(rootAPIDocsPath, 'structures'), (structErr, structFiles) => {
-      if (structErr) return callback(structErr)
-      callback(null, files.concat(structFiles))
-    })
+    callback(null, files)
   })
 }
 
@@ -30,7 +26,7 @@ function docs (version, callback) {
   } else if (semver.valid(version)) {
     // download specified version number
     download(version, callback)
-  } else if (exists(version)) {
+  } else if (pathExists(version)) {
     // version is a local directory
     readAllDocFiles(version, callback)
   } else {
