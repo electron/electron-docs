@@ -14,12 +14,17 @@ npm install electron-docs --save
 
 ## Programmatic Usage
 
-Require it and invoke the function with no arguments:
+Require the function and call it with any of the following:
+
+- A remote branch name, like `master`
+- A version number, like `1.4.4`
+- A commit SHA, like `76375a83eb3a97e7aed14d37d8bdc858c765e564`
+- A local directory, like `~/my/path/to/electron/`
 
 ```js
 const electronDocs = require('electron-docs')
 
-electronDocs().then(function(docs) {
+electronDocs('master').then(function(docs) {
   // docs is an array of objects, one for each markdown file in /docs
 })
 ```
@@ -34,16 +39,7 @@ Each object in the `docs` array looks like this:
 }
 ```
 
-The latest version of Electron is fetched by default. If you need a different
-version, specify it as the first argument:
-
-```js
-electronDocs('1.2.0').then(function(docs) {
-  // ...
-})
-```
-
-You can also point to a local directory instead of downloading a tarball:
+When fetching docs from a local directory, be sure to use a full path:
 
 ```js
 const path = require('path')
@@ -56,12 +52,6 @@ electronDocs(docsPath).then(function(docs) {
 If you prefer node-style callbacks instead of promises, those are supported too:
 
 ```js
-// latest
-electronDocs(function(err, docs) {
-  console.log(err, docs)
-})
-
-// a specific version
 electronDocs('1.0.0', function(err, docs) {
   console.log(err, docs)
 })
@@ -92,19 +82,19 @@ npm i && npm t
 
 ## Dependencies
 
-- [bluebird](https://github.com/petkaantonov/bluebird): Full featured Promises/A+ implementation with exceptionally good performance
-- [github-latest-release](https://github.com/chentsulin/github-latest-release): Get latest release information from github repository
-- [got](https://github.com/sindresorhus/got): Simplified HTTP requests
+- [got](https://ghub.io/got): Simplified HTTP requests
 - [gunzip-maybe](https://github.com/mafintosh/gunzip-maybe): Transform stream that gunzips its input if it is gzipped and just echoes it if not
-- [node-dir](https://github.com/fshost/node-dir): asynchronous file and directory operations for Node.js
-- [ora](https://github.com/sindresorhus/ora): Elegant terminal spinner
+- [node-dir](https://ghub.io/node-dir): asynchronous file and directory operations for Node.js
+- [ora](https://ghub.io/ora): Elegant terminal spinner
+- [path-exists](https://ghub.io/path-exists): Check if a path exists
+- [pify](https://github.com/sindresorhus/pify): Promisify a callback-style function
+- [semver](https://ghub.io/semver): The semantic version parser used by npm.
 - [tar-fs](https://github.com/mafintosh/tar-fs): filesystem bindings for tar-stream
 
 ## Dev Dependencies
 
 - [tap-spec](https://github.com/scottcorgan/tap-spec): Formatted TAP output like Mocha&#39;s spec reporter
 - [tape](https://github.com/substack/tape): tap-producing test harness for node and browsers
-
 
 ## License
 

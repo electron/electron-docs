@@ -5,42 +5,26 @@ const dir = require('node-dir')
 const tar = require('tar-fs')
 const pathExists = require('path-exists').sync
 const gunzip = require('gunzip-maybe')
-const latestRelease = require('github-latest-release')
 const semver = require('semver')
+const assert = require('assert')
 
-function readAllDocFiles (rootAPIDocsPath, callback) {
-  readLocalFiles(rootAPIDocsPath, (err, files) => {
-    if (err) return callback(err)
-    callback(null, files)
-  })
-}
+function docs (input, callback) {
+  assert(typeof input === 'string', 'A valid branch name, SHA, version number, or directory is required as the first argument')
+  assert(typeof callback === 'function', 'A callback function is required as the second argument')
 
-function docs (version, callback) {
-  if (!callback) {
-    // version not specified, default to latest
-    callback = version
-    version = null
-    latestRelease('electron', 'electron', function (err, release) {
-      download(release.tag_name, callback)
-    })
-  } else if (semver.valid(version)) {
-    // download specified version number
-    download(version, callback)
-  } else if (pathExists(version)) {
-    // version is a local directory
-    readAllDocFiles(version, callback)
+  if (pathExists(input)) {
+    readFromDisk(input, callback)
   } else {
-    console.error(`invalid electron version specified: ${version}`)
+    download(input, callback)
   }
 }
 
 function download (version, callback) {
-  version = version.replace(/v/, '')
-  var tarballUrl = `https://github.com/electron/electron/archive/v${version}.tar.gz`
+  if (!!semver.valid(version)) version = `v${version}`
+  var tarballUrl = `https://github.com/electron/electron/archive/${version}.tar.gz`
   var electronDir
   var tmpdir = require('os').tmpdir()
-  var filename = `electron-v${version}.tgz`
-  var tarball = path.join(tmpdir, filename)
+  var tarball = path.join(tmpdir, `electron-${version}.tgz`)
 
   var extractor = tar.extract(tmpdir, {
     ignore: (name) => { return !name.match('docs/')} }
@@ -51,7 +35,7 @@ function download (version, callback) {
       }
     })
     .on('finish', function extracted () {
-      readAllDocFiles(path.join(electronDir, 'docs', 'api'), callback)
+      readFromDisk(path.join(electronDir, 'docs', 'api'), callback)
     })
 
   got.stream(tarballUrl)
@@ -62,7 +46,7 @@ function download (version, callback) {
     })
 }
 
-function readLocalFiles (directory, callback) {
+function readFromDisk (directory, callback) {
   var docs = []
   dir.readFiles(
     directory,
