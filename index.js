@@ -27,8 +27,8 @@ function download (version, callback) {
   var tarball = path.join(tmpdir, `electron-${version}.tgz`)
 
   var extractor = tar.extract(tmpdir, {
-    ignore: (name) => { return !name.match('docs/')} }
-  )
+    ignore: (name) => { return !name.match(/[\\/]docs[\\/]/) }
+  })
     .on('entry', function extracting (header, stream, next) {
       if (!electronDir) {
         electronDir = path.join(tmpdir, header.name.split('/')[0])
