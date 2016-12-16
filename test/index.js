@@ -4,7 +4,7 @@ const semver = require('semver')
 const electronDocs = require('..')
 
 test('electronDocs', {timeout: 30 * 1000}, function (t) {
-  t.plan(11)
+  t.plan(13)
 
   electronDocs('master').then(function (docs) {
     t.comment('fetch by branch name')
@@ -12,6 +12,11 @@ test('electronDocs', {timeout: 30 * 1000}, function (t) {
     t.ok(docs.every(doc => doc.filename.length > 0), 'every doc has a filename property')
     t.ok(docs.every(doc => doc.slug.length > 0), 'every doc has a slug property')
     t.ok(docs.every(doc => doc.markdown_content.length > 0), 'every doc has a markdown_content property')
+
+    // console.log(docs.map(doc => doc.filename))
+    t.comment('non-API files are included')
+    t.ok(docs.find(doc => doc.filename === 'styleguide.md'), 'styleguide.md')
+    t.ok(docs.find(doc => doc.filename === 'tutorial/about.md'), 'tutorial/about.md')
   })
 
   electronDocs('1.2.0').then(function (docs) {

@@ -35,9 +35,10 @@ function download (version, callback) {
       }
     })
     .on('finish', function extracted () {
-      readFromDisk(path.join(electronDir, 'docs', 'api'), callback)
+      readFromDisk(path.join(electronDir, 'docs'), callback)
     })
 
+  console.log(`Downloading ${tarballUrl}`)
   got.stream(tarballUrl)
     .pipe(gunzip())
     .pipe(extractor)
