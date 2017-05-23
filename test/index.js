@@ -4,7 +4,7 @@ const semver = require('semver')
 const electronDocs = require('..')
 
 test('electronDocs', {timeout: 30 * 1000}, function (t) {
-  t.plan(13)
+  t.plan(14)
 
   electronDocs('master').then(function (docs) {
     t.comment('fetch by branch name')
@@ -21,6 +21,12 @@ test('electronDocs', {timeout: 30 * 1000}, function (t) {
 
   electronDocs('1.2.0').then(function (docs) {
     t.comment('fetch by version number')
+    var doc = docs[0]
+    t.ok(docs.every(doc => doc.filename.length > 0), 'every doc has a filename property')
+  })
+
+  electronDocs('v1.7.0').then(function (docs) {
+    t.comment('fetch by version number with leading v')
     var doc = docs[0]
     t.ok(docs.every(doc => doc.filename.length > 0), 'every doc has a filename property')
   })

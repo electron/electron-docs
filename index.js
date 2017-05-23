@@ -20,7 +20,9 @@ function docs (input, callback) {
 }
 
 function download (version, callback) {
-  if (!!semver.valid(version)) version = `v${version}`
+  // Prepend `v` to 1.2.3
+  if (version.match(/^\d+\.\d+\.\d+$/)) version = `v${version}`
+
   var tarballUrl = `https://github.com/electron/electron/archive/${version}.tar.gz`
   var electronDir
   var tmpdir = require('os').tmpdir()
