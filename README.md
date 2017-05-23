@@ -18,6 +18,7 @@ Require the function and call it with any of the following:
 
 - A remote branch name, like `master`
 - A version number, like `1.4.4`
+- A version number that starts with a `v`, like `v1.7.0`
 - A commit SHA, like `76375a83eb3a97e7aed14d37d8bdc858c765e564`
 - A local directory, like `~/my/path/to/electron/`
 
