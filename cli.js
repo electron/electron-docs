@@ -2,9 +2,11 @@
 
 const ora = require('ora')
 const docs = require('.')
-const spinner = ora('Downloading latest Electron docs').start()
 
-docs()
+const input = process.argv.length >= 3 ? process.argv[2] : 'master'
+const spinner = ora(`Downloading Electron docs from ${input}`).start()
+
+docs(input)
   .then(function (docs) {
     process.stdout.write(JSON.stringify(docs, null, 2))
   })
