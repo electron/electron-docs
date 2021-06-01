@@ -16,7 +16,7 @@ npm install electron-docs --save
 
 Require the function and call it with any of the following:
 
-- A remote branch name, like `master`
+- A remote branch name, like `main`
 - A version number, like `1.4.4`
 - A version number that starts with a `v`, like `v1.7.0`
 - A commit SHA, like `76375a83eb3a97e7aed14d37d8bdc858c765e564`
@@ -25,7 +25,7 @@ Require the function and call it with any of the following:
 ```js
 const electronDocs = require('electron-docs')
 
-electronDocs('master').then(function(docs) {
+electronDocs('main').then(function(docs) {
   // docs is an array of objects, one for each markdown file in /docs
 })
 ```

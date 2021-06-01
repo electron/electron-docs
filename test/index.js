@@ -6,7 +6,7 @@ const electronDocs = require('..')
 test('electronDocs', {timeout: 30 * 1000}, function (t) {
   t.plan(14)
 
-  electronDocs('master').then(function (docs) {
+  electronDocs('main').then(function (docs) {
     t.comment('fetch by branch name')
     t.ok(docs.length > 0, 'docs is a non-empty array')
     t.ok(docs.every(doc => doc.filename.length > 0), 'every doc has a filename property')
